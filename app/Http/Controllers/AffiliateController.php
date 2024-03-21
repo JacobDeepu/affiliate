@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\AffiliateRegistered;
+use App\Mail\AffiliateVerified;
 use App\Models\Affiliate;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -73,6 +74,8 @@ class AffiliateController extends Controller
         $affiliate->user_id = $user->id;
         $affiliate->verified = true;
         $affiliate->save();
+
+        Mail::to($affiliate->email)->send(new AffiliateVerified($affiliate, $password));
 
         return redirect()->back();
     }
