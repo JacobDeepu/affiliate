@@ -72,6 +72,8 @@ class AffiliateController extends Controller
             'referral_token' => Str::random(8),
         ]);
 
+        $user->assignRole('Affiliate');
+
         $affiliate->user_id = $user->id;
         $affiliate->verified = true;
         $affiliate->save();
