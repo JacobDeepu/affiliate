@@ -15,6 +15,7 @@ class UserSeeder extends Seeder
         $user = User::factory()->create([
             'name' => 'Super Admin',
             'email' => 'superadmin@admin.com',
+            'referral_token' => 'superadm',
         ]);
 
         $user->assignRole('Super Admin');
@@ -22,6 +23,7 @@ class UserSeeder extends Seeder
         $user = User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@admin.com',
+            'referral_token' => 'adminref',
         ]);
 
         $user->assignRole('Admin');
