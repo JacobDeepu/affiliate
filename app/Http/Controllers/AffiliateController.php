@@ -69,6 +69,7 @@ class AffiliateController extends Controller
             'name' => $affiliate['name'],
             'email' => $affiliate['email'],
             'password' => Hash::make($password),
+            'referral_token' => Str::random(8),
         ]);
 
         $affiliate->user_id = $user->id;
