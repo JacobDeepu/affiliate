@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AffiliateController;
+use App\Http\Controllers\ReferralController;
 use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,9 @@ Route::middleware([
 
     Route::put('/affiliate/{affiliate}', [AffiliateController::class, 'verify'])
         ->name('affiliate.verify');
+
+    Route::get('/referral', [ReferralController::class, 'index'])
+        ->name('referral.index');
 });
 
 Route::middleware([
