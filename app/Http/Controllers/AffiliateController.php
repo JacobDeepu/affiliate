@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AffiliateRegistered;
 use App\Models\Affiliate;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 
 class AffiliateController extends Controller
@@ -29,13 +31,15 @@ class AffiliateController extends Controller
             'location' => ['required', 'string', 'max:255'],
         ]);
 
-        Affiliate::create([
+        $affiliate = Affiliate::create([
             'name' => $request['name'],
             'email' => $request['email'],
             'phone' => $request['phone'],
             'location' => $request['location'],
             'verified' => false,
         ]);
+
+        Mail::to(config('custom.admin_mail'))->send(new AffiliateRegistered($affiliate));
 
         return redirect()->back()->banner('Registration Successful. Please Wait for Verification.');
     }
