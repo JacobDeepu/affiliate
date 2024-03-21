@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Referral;
 use App\Models\User;
+use App\Services\ReferralService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -15,12 +16,7 @@ class ReferralController extends Controller
      */
     public function index(): View
     {
-        $user = auth()->user();
-        if ($user->hasRole('Super Admin') || $user->hasRole('Admin')) {
-            $referrals = Referral::latest()->paginate(10);
-        } else {
-            $referrals = $user->referrals()->latest()->paginate(10);
-        }
+        $referrals = ReferralService::getReferrals(auth()->user());
 
         return view('referral.index', compact('referrals'));
     }
