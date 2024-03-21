@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Mail\AffiliateRegistered;
 use App\Models\Affiliate;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class AffiliateController extends Controller
@@ -59,7 +62,17 @@ class AffiliateController extends Controller
      */
     public function verify(Affiliate $affiliate): RedirectResponse
     {
-        $affiliate->update(['verified' => true]);
+        $password = Str::password(8, true, true, false, false);
+
+        $user = User::create([
+            'name' => $affiliate['name'],
+            'email' => $affiliate['email'],
+            'password' => Hash::make($password),
+        ]);
+
+        $affiliate->user_id = $user->id;
+        $affiliate->verified = true;
+        $affiliate->save();
 
         return redirect()->back();
     }
