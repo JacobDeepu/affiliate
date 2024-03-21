@@ -15,16 +15,12 @@
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                </div>
-
-                @can('view an affiliate')
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    @can('view an affiliate')
                     <x-nav-link href="{{ route('affiliate.index') }}" :active="request()->routeIs('affiliate.index')">
                         {{ __('Affiliates') }}
                     </x-nav-link>
+                    @endcan
                 </div>
-                @endcan
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ms-6">
