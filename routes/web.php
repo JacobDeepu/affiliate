@@ -15,6 +15,9 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::get('/affiliate', [AffiliateController::class, 'index'])
+        ->name('affiliate.index');
 });
 
 Route::middleware([

@@ -12,6 +12,16 @@ use Illuminate\View\View;
 class AffiliateController extends Controller
 {
     /**
+     * Display a listing of affiliates.
+     */
+    public function index(): View
+    {
+        $affiliates = Affiliate::latest()->paginate(10);
+
+        return view('affiliate.index', compact('affiliates'));
+    }
+
+    /**
      * Show the registration view.
      */
     public function create(): View
