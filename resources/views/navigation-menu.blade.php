@@ -20,6 +20,11 @@
                         {{ __('Affiliates') }}
                     </x-nav-link>
                     @endcan
+                    @can('view a role')
+                    <x-nav-link href="{{ route('role.index') }}" :active="request()->routeIs('role.*')">
+                        {{ __('Roles') }}
+                    </x-nav-link>
+                    @endcan
                 </div>
             </div>
 
@@ -150,6 +155,11 @@
             @can('view an affiliate')
             <x-responsive-nav-link href="{{ route('affiliate.index') }}" :active="request()->routeIs('affiliate.index')">
                 {{ __('Affiliates') }}
+            </x-responsive-nav-link>
+            @endcan
+            @can('view a role')
+            <x-responsive-nav-link href="{{ route('role.index') }}" :active="request()->routeIs('role.*')">
+                {{ __('Roles') }}
             </x-responsive-nav-link>
             @endcan
         </div>
