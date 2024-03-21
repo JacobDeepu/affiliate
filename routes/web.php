@@ -18,6 +18,9 @@ Route::middleware([
 
     Route::get('/affiliate', [AffiliateController::class, 'index'])
         ->name('affiliate.index');
+
+    Route::put('/affiliate/{affiliate}', [AffiliateController::class, 'verify'])
+        ->name('affiliate.verify');
 });
 
 Route::middleware([

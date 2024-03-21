@@ -53,4 +53,14 @@ class AffiliateController extends Controller
 
         return redirect()->back()->banner('Registration Successful. Please Wait for Verification.');
     }
+
+    /**
+     * Create a new affiliate.
+     */
+    public function verify(Affiliate $affiliate): RedirectResponse
+    {
+        $affiliate->update(['verified' => true]);
+
+        return redirect()->back();
+    }
 }
