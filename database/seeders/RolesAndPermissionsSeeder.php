@@ -19,6 +19,7 @@ class RolesAndPermissionsSeeder extends Seeder
 
         $arrayOfPermissionNames = [
             'view an affiliate', 'verify an affiliate',
+            'view a role', 'create a role', 'update a role', 'delete a role',
         ];
         $permissions = collect($arrayOfPermissionNames)->map(function ($permission) {
             return ['name' => $permission, 'guard_name' => 'web'];
