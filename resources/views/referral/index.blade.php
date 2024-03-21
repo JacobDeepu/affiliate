@@ -29,9 +29,6 @@
                             @forelse ($referrals as $referral)
                                 <tr class="border-b bg-white">
                                     <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                                        {{ $loop->iteration }}
-                                    </td>
-                                    <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
                                         {{ $referral->name }}
                                     </td>
                                     <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
