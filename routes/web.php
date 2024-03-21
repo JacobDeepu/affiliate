@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AffiliateController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -14,4 +15,13 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+});
+
+Route::middleware([
+    'guest:web',
+])->group(function () {
+    Route::get('/register', [AffiliateController::class, 'create'])
+        ->name('affiliate.create');
+    Route::post('/register', [AffiliateController::class, 'store'])
+        ->name('affiliate.store');
 });
