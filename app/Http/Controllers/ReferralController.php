@@ -15,7 +15,12 @@ class ReferralController extends Controller
      */
     public function index(): View
     {
-        $referrals = Referral::latest()->paginate(10);
+        $user = auth()->user();
+        if ($user->hasRole('Super Admin') || $user->hasRole('Admin')) {
+            $referrals = Referral::latest()->paginate(10);
+        } else {
+            $referrals = $user->referrals()->latest()->paginate(10);
+        }
 
         return view('referral.index', compact('referrals'));
     }
