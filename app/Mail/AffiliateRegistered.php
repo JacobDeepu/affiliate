@@ -39,7 +39,7 @@ class AffiliateRegistered extends Mailable
         return new Content(
             markdown: 'mail.affiliate.registered',
             with: [
-                'url' => route('dashboard'),
+                'url' => route('affiliate.index'),
             ],
         );
     }
