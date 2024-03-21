@@ -65,4 +65,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Get the user's referral link.
+     */
+    public function getReferralLinkAttribute()
+    {
+        return $this->referral_link = config('referral_url').$this->referral_token;
+    }
 }
