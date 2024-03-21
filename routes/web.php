@@ -3,6 +3,7 @@
 use App\Http\Controllers\AffiliateController;
 use App\Http\Controllers\ReferralController;
 use App\Http\Controllers\RoleController;
+use App\Services\ReferralService;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -15,7 +16,9 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        $referrals = ReferralService::getReferrals(auth()->user());
+
+        return view('dashboard', compact('referrals'));
     })->name('dashboard');
 
     Route::get('/affiliate', [AffiliateController::class, 'index'])
