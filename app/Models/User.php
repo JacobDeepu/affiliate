@@ -72,7 +72,7 @@ class User extends Authenticatable
      */
     public function getReferralLinkAttribute()
     {
-        return $this->referral_link = config('referral_url').$this->referral_token;
+        return $this->referral_link = config('custom.referral_url').'?ref='.$this->referral_token;
     }
 
     /**
