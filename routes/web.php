@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AffiliateController;
+use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -31,3 +32,7 @@ Route::middleware([
     Route::post('/register', [AffiliateController::class, 'store'])
         ->name('affiliate.store');
 });
+
+Route::resource('role', RoleController::class)
+    ->middleware(['auth:sanctum', 'permission:view a role|create a role|update a role|delete a role'])
+    ->except('show');
