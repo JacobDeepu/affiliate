@@ -27,6 +27,9 @@ Route::middleware([
     Route::put('/affiliate/{affiliate}', [AffiliateController::class, 'verify'])
         ->name('affiliate.verify');
 
+    Route::get('/affiliate/{affiliate}', [AffiliateController::class, 'show'])
+        ->name('affiliate.show');
+
     Route::resource('referral', ReferralController::class)
         ->only(['index', 'edit', 'update', 'destroy']);
 });

@@ -82,4 +82,12 @@ class AffiliateController extends Controller
 
         return redirect()->back();
     }
+
+    /**
+     * Display the specified affiliate.
+     */
+    public function show(Affiliate $affiliate): View
+    {
+        return view('affiliate.show', compact('affiliate'));
+    }
 }
