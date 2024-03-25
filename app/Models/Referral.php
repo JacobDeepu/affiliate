@@ -21,6 +21,8 @@ class Referral extends Model
         'phone',
         'email',
         'course',
+        'branch',
+        'location',
     ];
 
     /**
