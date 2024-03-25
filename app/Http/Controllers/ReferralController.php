@@ -63,4 +63,35 @@ class ReferralController extends Controller
 
         return redirect()->route('referral.index');
     }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function register(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'numeric', 'min:10'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'course' => ['nullable', 'string', 'max:255'],
+            'branch' => ['nullable', 'string', 'max:255'],
+            'location' => ['nullable', 'string', 'max:255'],
+        ]);
+
+        $referral_token = ReferralService::getReferralTokenCookie($request);
+
+        $referrer_id = User::where('referral_token', $referral_token)->pluck('id')->first();
+
+        Referral::create([
+            'referrer_id' => $referrer_id,
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'course' => $request->course,
+            'branch' => $request->branch,
+            'location' => $request->location,
+        ]);
+
+        return redirect()->away(config('custom.external_url'));
+    }
 }

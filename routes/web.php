@@ -4,9 +4,18 @@ use App\Http\Controllers\AffiliateController;
 use App\Http\Controllers\ReferralController;
 use App\Http\Controllers\RoleController;
 use App\Services\ReferralService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
+Route::post('/', [ReferralController::class, 'register'])
+    ->name('referral.register');
+
+Route::get('/', function (Request $request) {
+    $cookie = ReferralService::setReferralTokenCookie($request);
+    if ($cookie) {
+        return redirect('/')->cookie($cookie);
+    }
+
     return view('welcome');
 });
 
