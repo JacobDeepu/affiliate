@@ -36,11 +36,13 @@ class UpdateBankInformationForm extends Component
     {
         $user = Auth::user();
 
-        $this->account_number = $user->bankAccount->account_number;
-        $this->bank_name = $user->bankAccount->bank_name;
-        $this->branch_name = $user->bankAccount->branch_name;
-        $this->ifsc_code = $user->bankAccount->ifsc_code;
-        $this->passbook = $user->bankAccount->passbook_path;
+        if ($user->bankAccount) {
+            $this->account_number = $user->bankAccount->account_number;
+            $this->bank_name = $user->bankAccount->bank_name;
+            $this->branch_name = $user->bankAccount->branch_name;
+            $this->ifsc_code = $user->bankAccount->ifsc_code;
+            $this->passbook = $user->bankAccount->passbook_path;
+        }
     }
 
     /**
